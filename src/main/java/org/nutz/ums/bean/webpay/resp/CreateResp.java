@@ -1,6 +1,5 @@
 package org.nutz.ums.bean.webpay.resp;
 
-import org.nutz.lang.util.NutMap;
 import org.nutz.ums.bean.BaseResp;
 
 /**
