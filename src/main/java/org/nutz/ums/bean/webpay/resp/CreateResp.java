@@ -129,19 +129,6 @@ public class CreateResp extends BaseResp {
     }
 
     /**
-     * JSAPI支付用的请求报文，带有签名信息
-     */
-    private NutMap jsPayRequest;
-
-    public NutMap getJsPayRequest() {
-        return jsPayRequest;
-    }
-
-    public void setJsPayRequest(NutMap jsPayRequest) {
-        this.jsPayRequest = jsPayRequest;
-    }
-
-    /**
      * 支付渠道商户号，各渠道情况不同，酌情转换
      */
     private String targetMid;
