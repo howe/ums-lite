@@ -37,12 +37,14 @@ public class BillsApi {
                 throw new NullPointerException("totalAmount为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
-                GetQrcodeResp resp = Json.fromJson(GetQrcodeResp.class, HttpUtil.post(Comm.NETPAY_BILLS_GETQRCODE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
+                header.set("AccessToken", req.getAccessToken());
+                String json = HttpUtil.post(Comm.NETPAY_BILLS_GETQRCODE_ACTION, header, Json.toJson(req, JsonFormat.compact()));
+                System.out.println(json);
+                GetQrcodeResp resp = Json.fromJson(GetQrcodeResp.class, json);
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -70,12 +72,12 @@ public class BillsApi {
                 throw new NullPointerException("totalAmount为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 GetQrcodeResp resp = Json.fromJson(GetQrcodeResp.class, HttpUtil.post(Comm.NETPAY_BILLS_GETQRCODE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return QRCode.from(resp.getBillQRCode());
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -103,12 +105,12 @@ public class BillsApi {
                 throw new NullPointerException("totalAmount为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 UpdateQrcodeResp resp = Json.fromJson(UpdateQrcodeResp.class, HttpUtil.post(Comm.NETPAY_BILLS_UPDATEQRCODE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -136,12 +138,12 @@ public class BillsApi {
                 throw new NullPointerException("totalAmount为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 CloseQrcodeResp resp = Json.fromJson(CloseQrcodeResp.class, HttpUtil.post(Comm.NETPAY_BILLS_CLOSEQRCODE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -169,12 +171,12 @@ public class BillsApi {
                 throw new NullPointerException("billNo为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 QueryResp resp = Json.fromJson(QueryResp.class, HttpUtil.post(Comm.NETPAY_BILLS_QUERY_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -211,7 +213,7 @@ public class BillsApi {
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {

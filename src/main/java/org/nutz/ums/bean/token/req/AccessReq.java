@@ -29,7 +29,7 @@ public class AccessReq {
      * 时间戳
      * yyyyMMddHHmmss
      */
-    private String timestamp = Times.getNowSDT();
+    private String timestamp = Times.format("yyyyMMddHHmmss", Times.now());
 
     public String getTimestamp() {
         return timestamp;

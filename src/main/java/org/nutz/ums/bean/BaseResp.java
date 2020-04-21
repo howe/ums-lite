@@ -38,6 +38,19 @@ public class BaseResp {
     }
 
     /**
+     * 错误信息
+     */
+    private String errInfo;
+
+    public String getErrInfo() {
+        return errInfo;
+    }
+
+    public void setErrInfo(String errInfo) {
+        this.errInfo = errInfo;
+    }
+
+    /**
      * 消息ID，原样返回
      */
     private String msgId;

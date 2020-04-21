@@ -70,12 +70,14 @@ public class WebpayApi {
                 throw new NullPointerException("userId为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
-                CreateResp resp = Json.fromJson(CreateResp.class, HttpUtil.post(Comm.NETPAY_TRADE_CREATE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
+                header.set("AccessToken", req.getAccessToken());
+                String json = HttpUtil.post(Comm.NETPAY_TRADE_CREATE_ACTION, header, Json.toJson(req, JsonFormat.compact()));
+                System.out.println(json);
+                CreateResp resp = Json.fromJson(CreateResp.class, json);
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -109,12 +111,12 @@ public class WebpayApi {
                 throw new NullPointerException("subOpenId为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 UnifiedorderResp resp = Json.fromJson(UnifiedorderResp.class, HttpUtil.post(Comm.NETPAY_WX_UNIFIEDORDER_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -146,12 +148,12 @@ public class WebpayApi {
                 throw new NullPointerException("userId与code不能都为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 JspayResp resp = Json.fromJson(JspayResp.class, HttpUtil.post(Comm.NETPAY_ACP_JSPAY_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -178,12 +180,12 @@ public class WebpayApi {
                 throw new NullPointerException("merOrderId为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 QueryResp resp = Json.fromJson(QueryResp.class, HttpUtil.post(Comm.NETPAY_QUERY_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -214,12 +216,12 @@ public class WebpayApi {
                 throw new NullPointerException("refundAmount为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 RefundResp resp = Json.fromJson(RefundResp.class, HttpUtil.post(Comm.NETPAY_REFUND_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -246,12 +248,12 @@ public class WebpayApi {
                 throw new NullPointerException("merOrderId为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 RefundqueryResp resp = Json.fromJson(RefundqueryResp.class, HttpUtil.post(Comm.NETPAY_REFUNDQUERY_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
@@ -278,12 +280,12 @@ public class WebpayApi {
                 throw new NullPointerException("merOrderId为空");
             } else {
                 Header header = Header.create();
-                header.set("OPEN-ACCESS-TOKEN AccessToken", req.getAccessToken());
+                header.set("AccessToken", req.getAccessToken());
                 CloseResp resp = Json.fromJson(CloseResp.class, HttpUtil.post(Comm.NETPAY_CLOSE_ACTION, header, Json.toJson(req, JsonFormat.compact())));
                 if (Strings.equalsIgnoreCase(resp.getErrCode(), "SUCCESS")) {
                     return resp;
                 } else {
-                    throw new Exception(resp.getErrMsg());
+                    throw new Exception(Strings.isNotBlank(resp.getErrMsg()) ? resp.getErrMsg() : resp.getErrInfo());
                 }
             }
         } catch (Exception e) {
